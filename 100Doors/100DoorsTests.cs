@@ -1,6 +1,7 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using FluentAssertions;
 
 // 100 doors in a row are all initially closed. You make
 // 100 passes by the doors. The first time through, you
@@ -24,7 +25,6 @@ public class Tests
     public void ToggleDoorsReturnsAnArray()
     {
         var doors = DoorMan.ToggleDoors();
-
-        Assert.AreEqual(true, false);
+        doors.Should().Equal(new bool[] { });
     }
 }
