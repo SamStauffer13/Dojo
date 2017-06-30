@@ -11,7 +11,10 @@
         "Microsoft.NETCore.App": {
           "type": "platform",
           "version": "1.0.0"
-        }
+        },
+        "Microsoft.NET.Test.Sdk" : "15.0.0",
+        "MSTest.TestAdapter" : "1.1.11",
+        "MSTest.TestFramework" : "1.1.11"
       },
       "imports": "dnxcore50"
     }
