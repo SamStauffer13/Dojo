@@ -17,14 +17,41 @@ using FluentAssertions;
 
 // [Source http://rosettacode.org]
 
-// https://docs.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-mstest
 [TestClass]
 public class Tests
 {
     [TestMethod]
-    public void ToggleDoorsReturnsAnArray()
+    public void ToogleDoorsWillReturnTheSameAmountOfDoorsPassedIn()
     {
-        var doors = DoorMan.ToggleDoors();
-        doors.Should().Equal(new bool[] { });
+        var toggledDoors = DoorMan.ToggleDoors(new bool[100]);
+        toggledDoors.Should().HaveCount(100);
+    }
+
+    [TestMethod]
+    public void OnTheFirstPassToggleDoorsWillOpenAllTheDoors()
+    {
+        var doors = new bool[100];
+        var toggledDoors = DoorMan.ToggleDoors(doors);
+
+        for (var i = 0; i < 100; i++)
+        {
+            var door = toggledDoors[i];
+            door.Should().BeFalse($"door #{i} should be open");
+        }
+    }
+
+    [TestMethod]
+    public void OnTheSecondPassToggleDoorsWillCloseEveryOtherTheDoor()
+    {
+        var doors = new bool[100];
+        var toggledDoors = DoorMan.ToggleDoors(doors, 2);
+        for (var i = 0; i < 100; i++)
+        {
+            if (i % 2 == 0)
+            {
+                var door = toggledDoors[i];
+                door.Should().BeFalse($"door #{i} should be closed");
+            }
+        }
     }
 }
