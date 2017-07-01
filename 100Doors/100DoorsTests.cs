@@ -36,21 +36,25 @@ public class Tests
         for (var i = 0; i < 100; i++)
         {
             var door = toggledDoors[i];
-            door.Should().BeFalse($"door #{i} should be open");
+            door.Should().BeTrue($"door #{i} should be open");
         }
     }
 
     [TestMethod]
-    public void OnTheSecondPassToggleDoorsWillCloseEveryOtherTheDoor()
+    public void OnTheSecondPassToggleDoorsWillCloseEveryOtherDoor()
     {
         var doors = new bool[100];
         var toggledDoors = DoorMan.ToggleDoors(doors, 2);
-        for (var i = 0; i < 100; i++)
+        for (var i = 1; i < 100; i++)
         {
+            var door = toggledDoors[i - 1];
             if (i % 2 == 0)
             {
-                var door = toggledDoors[i];
                 door.Should().BeFalse($"door #{i} should be closed");
+            }
+            else
+            {
+                door.Should().BeTrue($"door #{i} should be open");
             }
         }
     }
