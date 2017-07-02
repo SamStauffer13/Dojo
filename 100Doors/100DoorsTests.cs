@@ -1,7 +1,7 @@
-using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
-using FluentAssertions;
+    using System;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using System.Collections.Generic;
+    using FluentAssertions;
 
 // 100 doors in a row are all initially closed. You make
 // 100 passes by the doors. The first time through, you
@@ -28,7 +28,7 @@ public class DoorManSpecs
     }
 
     [TestMethod]
-    public void DoorManWillOpenAllTheDoorsOnTheFirstPass()
+    public void DoorManCanOpenAllTheDoorsOnTheFirstPass()
     {
         var toggledDoors = new DoorMan(100).ToggleDoors(1);
         for (var i = 0; i < 100; i++)
@@ -39,7 +39,7 @@ public class DoorManSpecs
     }
 
     [TestMethod]
-    public void DoorManWillCloseEveryOtherDoorOnTheSecondPass()
+    public void DoorManCanCloseEveryOtherDoorOnTheSecondPass()
     {
         var toggledDoors = new DoorMan(100).ToggleDoors(2);
         for (var i = 1; i < 100; i++)
@@ -57,7 +57,7 @@ public class DoorManSpecs
     }
 
     [TestMethod]
-    public void DoorManWillToggleEveryThirdDoorOnTheThirdPass()
+    public void DoorManCanToggleEveryThirdDoorOnTheThirdPass()
     {
         var toggledDoors = new DoorMan(100).ToggleDoors(3);
         toggledDoors[2].Should().BeFalse($"third door should be false on third pass");
@@ -66,7 +66,7 @@ public class DoorManSpecs
     }
 
     [TestMethod]
-    public void AfterOneHundredPassesOverOneHundredDoors()
+    public void DoorManCanSolveThe100DoorsProblem()
     {
         var toggledDoors = new DoorMan(100).ToggleDoors(100);
         toggledDoors[99].Should().BeTrue("the hundredth door will be open on the hundredth pass");

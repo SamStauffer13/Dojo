@@ -11,13 +11,13 @@ public class DoorMan
     {
         for (var loop = 0; loop < loops; loop++)
         {
-            for (var i = 0; i < doors.Length; i++)
+            for (var doorLocation = 0; doorLocation < doors.Length; doorLocation++)
             {
-                var isNthPosition =  (i + 1) % (loop + 1) == 0;
+                var isNthPosition =  (doorLocation + 1) % (loop + 1) == 0;
 
                 if (isNthPosition)
                 {
-                    doors[i] = !doors[i];
+                    doors[doorLocation] = !doors[doorLocation];
                 }
             }
         }
