@@ -1,16 +1,26 @@
-public static class DoorMan
+using System;
+
+public class DoorMan
 {
-    public static bool[] ToggleDoors(bool[] doors, int numberOLoops = 1)
+    private bool[] doors;
+    public DoorMan(int numberOfDoors)
     {
-        for(var loops = 0; loops < numberOLoops; loops++)
+        doors = new bool[numberOfDoors];
+    }
+    public bool[] ToggleDoors(int loops)
+    {
+        for (var loop = 0; loop < loops; loop++)
         {
-            for(var i = 0; i < doors.Length; i++)
-            {            
-                var door = doors[i];
-                doors[i] = !door;
+            for (var i = 0; i < doors.Length; i++)
+            {
+                var isNthPosition =  (i + 1) % (loop + 1) == 0;
+
+                if (isNthPosition)
+                {
+                    doors[i] = !doors[i];
+                }
             }
         }
-
         return doors;
     }
 }

@@ -1,4 +1,4 @@
-
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using FluentAssertions;
@@ -18,21 +18,19 @@ using FluentAssertions;
 // [Source http://rosettacode.org]
 
 [TestClass]
-public class Tests
+public class DoorManSpecs
 {
     [TestMethod]
-    public void ToogleDoorsWillReturnTheSameAmountOfDoorsPassedIn()
+    public void DoorManCanOpen100Doors()
     {
-        var toggledDoors = DoorMan.ToggleDoors(new bool[100]);
+        var toggledDoors = new DoorMan(100).ToggleDoors(0);
         toggledDoors.Should().HaveCount(100);
     }
 
     [TestMethod]
-    public void OnTheFirstPassToggleDoorsWillOpenAllTheDoors()
+    public void DoorManWillOpenAllTheDoorsOnTheFirstPass()
     {
-        var doors = new bool[100];
-        var toggledDoors = DoorMan.ToggleDoors(doors);
-
+        var toggledDoors = new DoorMan(100).ToggleDoors(1);
         for (var i = 0; i < 100; i++)
         {
             var door = toggledDoors[i];
@@ -41,10 +39,9 @@ public class Tests
     }
 
     [TestMethod]
-    public void OnTheSecondPassToggleDoorsWillCloseEveryOtherDoor()
+    public void DoorManWillCloseEveryOtherDoorOnTheSecondPass()
     {
-        var doors = new bool[100];
-        var toggledDoors = DoorMan.ToggleDoors(doors, 2);
+        var toggledDoors = new DoorMan(100).ToggleDoors(2);
         for (var i = 1; i < 100; i++)
         {
             var door = toggledDoors[i - 1];
@@ -57,5 +54,21 @@ public class Tests
                 door.Should().BeTrue($"door #{i} should be open");
             }
         }
+    }
+
+    [TestMethod]
+    public void DoorManWillToggleEveryThirdDoorOnTheThirdPass()
+    {
+        var toggledDoors = new DoorMan(100).ToggleDoors(3);
+        toggledDoors[2].Should().BeFalse($"third door should be false on third pass");
+        toggledDoors[5].Should().BeTrue($"sixth door should be true on third pass");
+        toggledDoors[8].Should().BeFalse($"ninth door should be false on third pass");
+    }
+
+    [TestMethod]
+    public void AfterOneHundredPassesOverOneHundredDoors()
+    {
+        var toggledDoors = new DoorMan(100).ToggleDoors(100);
+        toggledDoors[99].Should().BeTrue("the hundredth door will be open on the hundredth pass");
     }
 }
