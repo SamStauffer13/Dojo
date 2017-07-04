@@ -17,9 +17,19 @@ using FluentAssertions;
 public class ScrabblerSpecs
 {
     [TestMethod]
-    public void ScrabbleReturnsAnArray()
+    public void ScrabbleDeterminesAllPotentialAnagramsOfAWord()
     {
-        var helloWorld = "hello world".Scrabble();
-        helloWorld.ShouldBeEquivalentTo(new string[]{});
+        var words = "biro".Scrabble();
+
+        var possibleVariations = new[] {
+            "biro", "bior", "brio", "broi",
+            "boir", "bori", "ibro", "ibor",
+            "irbo", "irob", "iobr", "iorb",
+            "rbio", "rboi", "ribo", "riob",
+            "roib", "robi", "obir", "obri",
+            "oibr", "oirb", "orbi", "orib"
+            };
+
+        words.Should().Equal(possibleVariations);
     }
 }
