@@ -19,9 +19,9 @@ public class ScrabblerSpecs
     [TestMethod]
     public void ScrabbleDeterminesAllPotentialAnagramsOfAWord()
     {
-        var words = "biro".Scrabble();
+        var permutations = "biro".Scrabble();
 
-        var possibleVariations = new[] {
+        var possiblePermutations = new[] {
             "biro", "bior", "brio", "broi",
             "boir", "bori", "ibro", "ibor",
             "irbo", "irob", "iobr", "iorb",
@@ -30,6 +30,6 @@ public class ScrabblerSpecs
             "oibr", "oirb", "orbi", "orib"
             };
 
-        words.Should().Equal(possibleVariations);
+        permutations.Should().BeEquivalentTo(possiblePermutations);
     }
 }
